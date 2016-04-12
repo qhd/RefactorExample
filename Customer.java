@@ -34,22 +34,7 @@ public class Customer {
             double thisAmount = 0;
             Rental each = (Rental) rentals.nextElement();
 
-            //计算每一部电影的价格，并累加
-            switch (each.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.getDaysRented() > 2)
-                        thisAmount += (each.getDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += each.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.getDaysRented() > 3)
-                        thisAmount += (each.getDaysRented() - 3) * 1.5;
-                    break;
-            }
+            thisAmount = amountFor(each);
 
             //积分加一
             frequentRenterPoints++;
@@ -68,5 +53,25 @@ public class Customer {
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
 
         return result;
+    }
+
+    private int amountFor(Rental each) {
+        int thisAmount = 0;
+        switch (each.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                thisAmount += 2;
+                if (each.getDaysRented() > 2)
+                    thisAmount += (each.getDaysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += each.getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                thisAmount += 1.5;
+                if (each.getDaysRented() > 3)
+                    thisAmount += (each.getDaysRented() - 3) * 1.5;
+                break;
+        }
+        return thisAmount;
     }
 }
