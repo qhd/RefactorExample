@@ -31,10 +31,7 @@ public class Customer {
         String result = "Rental Record for " + getName() + "\n";
 
         while (rentals.hasMoreElements()) {
-            double thisAmount = 0;
             Rental each = (Rental) rentals.nextElement();
-
-            thisAmount = each.getCharge();
 
             //积分加一
             frequentRenterPoints++;
@@ -44,8 +41,8 @@ public class Customer {
                 frequentRenterPoints++;
 
             //显示本电影的数据
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
-            totalAmont += thisAmount;
+            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
+            totalAmont += each.getCharge();
         }
 
         //统计的数据
