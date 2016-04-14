@@ -1,5 +1,6 @@
 package com.example.qiuhaodong.refactor.data;
 
+import java.util.logging.Logger;
 
 
 
@@ -61,6 +62,15 @@ class NewReleasePrice extends Price {
 class RegularPrice extends Price {
     int getPriceCode() {
         return Movie.REGULAR;
+    }
+
+    double getCharge(int daysRented) {
+        //Logger.getLogger("myLog").info("运行RegularPrice对象的getCharge"); //用于判断是否执行了子类的方法
+
+        float result = 2;
+        if (daysRented > 2)
+            result += (daysRented - 2) * 1.5;
+        return result;
     }
 }
 
